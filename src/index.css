@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#text-logo {
+    transition: .3s;
+}
+
+#text-logo:hover {
+    color:grey;
+}
