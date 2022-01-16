@@ -9,11 +9,13 @@ export const GithubProvider = ({children}) => {
     const [users, setUsers] = useState([]);
 
     const fetchUsers = async () => {
-        const response = await fetch(`${GITHUB_URL}/users`, {
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN}`
-            }
-        });
+        const response = await fetch(`${GITHUB_URL}/users`,
+        //{
+            // headers: {
+            //     Authorization: `token ${GITHUB_TOKEN}`
+            // }
+        //}
+        );
 
         const data = await response.json();
         setUsers(data);
