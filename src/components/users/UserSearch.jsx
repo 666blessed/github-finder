@@ -1,9 +1,12 @@
 import React from 'react';
 import {useState, useContext} from 'react';
+import GithubContext from '../../context/github/GithubContext';
 
 function UserSearch() {
     const [text, setText] = useState('');
     const handleChange = e => setText(e.target.value);
+    const {users} = useContext(GithubContext);
+
     const handleSubmit = e => {
         e.preventDefault();
         if (text === '') {
@@ -26,11 +29,12 @@ function UserSearch() {
                         </div>
                     </div>
                 </form>
-
             </div>
-            <div>
-                <button className="btn btn-ghost btn-lg">Clear</button>
-            </div>
+            {users.length > 0 && (
+                <div>
+                    <button className="btn btn-ghost btn-lg">Clear</button>
+                </div>
+            )}          
         </div>
     )
 }
