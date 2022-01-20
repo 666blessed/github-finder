@@ -14,3 +14,7 @@
     border-radius: 0.5rem;
     opacity: 0.45;
 }
+
+.card-transition {
+    transition: .3s;
+}

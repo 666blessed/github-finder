@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import '../../index.css';
 
 function UserItem({user: {login, avatar_url}}) {
     return (
-        <div className='card shadow-md compact side bg-base-100'>
+        <div className='card shadow-md compact side bg-base-100 hover:bg-gray-800 card-transition'>
             <div className='flex-row items-center space-x-4 card-body'>
                 <div>
                     <div className='avatar'>
