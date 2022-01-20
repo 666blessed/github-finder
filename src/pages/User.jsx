@@ -1,19 +1,29 @@
 import React from 'react';
-import {userEffect, useContext} from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import {useEffect, useContext} from 'react';
 import GithubContext from '../context/github/GithubContext';
 import {useParams} from 'react-router-dom';
-import {FaCodepen, FaStore, FaUserFriends, FaUsers, FaCode} from 'react-icons/fa';
+import {FaStore, FaUserFriends, FaUsers, FaCode} from 'react-icons/fa';
 import {Link} from 'react-router-dom';
 import Spinner from '../components/layout/Spinner';
+import RepoList from '../components/repos/RepoList';
+import {getUser, getUserRepos} from '../context/github/GithubActions';
 
 function User() {
-  const {getUser, user, loading} = useContext(GithubContext);
+  const {user, loading, repos, dispatch} = useContext(GithubContext);
   const params = useParams();
 
   useEffect(() => {
-    getUser(params.login);
-  }, []);
+    dispatch({type: 'SET_LOADING'})
+    const getUserData = async() => {
+      const userData = await getUser(params.login);
+      dispatch({type: 'GET_USER', payload: userData})
+
+      const userRepoData = await getUserRepos(params.login);
+      dispatch({type: 'GET_REPOS', payload: userRepoData})
+    }
+
+    getUserData();
+  }, [dispatch, params.login]);
 
   const {
     name,
@@ -150,7 +160,7 @@ function User() {
             Public Repos
           </div>
           <div className="stat-value pr-5 text-3xl md:text-4xl">
-            {following}
+            {public_repos}
           </div>
         </div>
 
@@ -165,8 +175,9 @@ function User() {
             {public_gists}
           </div>
         </div>
-
       </div>
+
+      <RepoList repos={repos}/>
     </div>
     
   </>;
