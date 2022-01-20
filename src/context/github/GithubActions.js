@@ -6,7 +6,7 @@ export const searchUsers = async (text) => {
     })
 
     const response = await fetch(`${GITHUB_URL}/search/users?${params}`);
-    
+
     const {items} = await response.json();   
     return items;
 };
@@ -33,6 +33,5 @@ export const getUserRepos = async (login) => {
     const response = await fetch(`${GITHUB_URL}/users/${login}/repos?${params}`); 
 
     const data = await response.json();          
-    console.log(data);
     return data;
 };
